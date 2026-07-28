@@ -1,0 +1,42 @@
+# AWS Amplify Hosting build specification for apps/dashboard.
+#
+# This file has to live at the repository root. Amplify only reads `amplify.yml` from the
+# root of the repository (or from a monorepo app root declared with the monorepo syntax);
+# a copy under apps/dashboard/ is ignored, and the console silently falls back to a
+# generated build command instead.
+#
+# Deliberately the single-app syntax rather than the monorepo `applications:` list. The
+# monorepo form runs install and build inside the app root, and the dashboard cannot be
+# built from apps/dashboard alone: it imports @whyguard/contracts from the workspace and
+# needs the single pnpm lockfile at the root. So the build runs at the root and only the
+# artifact path points into the app.
+#
+# Required environment variable on the Amplify app:
+#   VITE_WHYGUARD_API_URL   https URL of the deployed API
+#
+# Leave VITE_WHYGUARD_API_TOKEN unset for a public dashboard. A Vite variable is inlined
+# into the bundle, so a token there is readable by anyone who loads the page — name the
+# readable repositories with WHYGUARD_PUBLIC_REPOS on the API instead.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Corepack honors the "packageManager" field, so the pinned pnpm is used rather
+        # than whatever the image ships with.
+        - corepack enable
+        - corepack prepare --activate
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        # `...` builds the workspace packages the dashboard depends on first. Building
+        # only the dashboard would fail on unbuilt @whyguard/contracts types.
+        - pnpm turbo run build --filter=@whyguard/dashboard...
+  artifacts:
+    baseDirectory: apps/dashboard/dist
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
+      - .turbo/**/*

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "whyguard": {
+      "command": "node",
+      "args": ["apps/mcp-server/dist/index.js"],
+      "env": {
+        "WHYGUARD_REPO_ROOT": "${WHYGUARD_REPO_ROOT}"
+      },
+      "disabled": false,
+      "autoApprove": [],
+      "disabledTools": []
+    }
+  }
+}

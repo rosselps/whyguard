@@ -1,0 +1,33 @@
+{
+  "name": "@whyguard/application",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@whyguard/ast-adapter": "workspace:*",
+    "@whyguard/contracts": "workspace:*",
+    "@whyguard/domain": "workspace:*",
+    "@whyguard/git-adapter": "workspace:*",
+    "@whyguard/github-adapter": "workspace:*",
+    "@whyguard/test-fixtures": "workspace:*",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@octokit/rest": "22.0.1",
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.7"
+  }
+}

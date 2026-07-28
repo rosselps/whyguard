@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "WhyGuard PreToolUse Guard",
+      "trigger": "PreToolUse",
+      "matcher": "fs_write|str_replace",
+      "action": {
+        "type": "command",
+        "command": "node /absolute/path/to/whyguard/apps/cli/dist/index.js hook --repo \"${WORKSPACE_ROOT}\"",
+        "timeout": 15
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+# Generated single-file npm artifact (apps/cli/scripts/bundle.mjs), rebuilt on publish.
+dist-bundle/
+build/
+.turbo/
+.tmp/
+*.log
+.env
+.env.local
+data/
+coverage/
+# Scratch repository that `whyguard demo` builds in the current directory. Running the
+# demo from inside this repo is the normal way to check it, and without this line it
+# leaves the tree dirty, which blocks scripts/publish-clean.mjs.
+whyguard-demo/
+.DS_Store

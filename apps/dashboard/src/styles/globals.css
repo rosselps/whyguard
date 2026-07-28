@@ -1,0 +1,30 @@
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Dark theme is canonical for the MVP (spec section 12): "La aplicación web
+ * mantiene el tema oscuro como tema canónico del MVP." No parallel light theme.
+ */
+html,
+body {
+  background-color: var(--wg-canvas);
+  color: var(--wg-text);
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

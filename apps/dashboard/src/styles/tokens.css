@@ -1,0 +1,29 @@
+/**
+ * Canonical design tokens, copied verbatim from
+ * docs/design/ui-ux.md
+ * section 27. Do not edit a color/radius value here without first updating that
+ * document — per its own change-control rule (section 0): "Todo cambio de
+ * token, logo o patrón debe actualizar primero esta especificación."
+ */
+:root {
+  --wg-brand-500: #6c5ce7;
+  --wg-brand-400: #8778f5;
+  --wg-accent: #00c2a8;
+  --wg-success: #20c77a;
+  --wg-warning: #f5b940;
+  --wg-danger: #ff5c6c;
+  --wg-info: #4da3ff;
+
+  --wg-canvas: #0b0f16;
+  --wg-surface: #111824;
+  --wg-surface-2: #151e2c;
+  --wg-border: #273548;
+  --wg-text: #f7f9fc;
+  --wg-text-2: #c7d0dc;
+  --wg-muted: #8c9aaa;
+
+  --wg-radius-sm: 8px;
+  --wg-radius-md: 10px;
+  --wg-radius-card: 12px;
+  --wg-radius-lg: 16px;
+}

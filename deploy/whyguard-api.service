@@ -1,0 +1,31 @@
+[Unit]
+Description=WhyGuard API
+Documentation=https://github.com/rosselps/whyguard/blob/main/docs/deploy/aws.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=whyguard
+Group=whyguard
+WorkingDirectory=/home/whyguard/app
+Environment=NODE_ENV=production
+Environment=HOME=/home/whyguard
+ExecStart=/usr/bin/node apps/api/dist/index.js
+Restart=always
+RestartSec=5
+
+# A process killed mid-scan leaves a full clone behind. The startup sweep reclaims those,
+# so restarting is also how the disk gets cleaned up.
+
+# The process reads its code and writes only its database and its clone workspace.
+ProtectSystem=strict
+ReadWritePaths=/home/whyguard/data /home/whyguard/tmp
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

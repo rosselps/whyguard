@@ -1,0 +1,76 @@
+{
+  "name": "whyguard",
+  "version": "0.1.1",
+  "description": "Reconstructs why code exists and stops humans or agents from erasing that protection by accident.",
+  "keywords": [
+    "code-review",
+    "git",
+    "guardrail",
+    "refactoring",
+    "static-analysis",
+    "ai-agents",
+    "kiro"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/rosselps/whyguard#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosselps/whyguard.git",
+    "directory": "apps/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/rosselps/whyguard/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "bin": {
+    "whyguard": "dist-bundle/whyguard.js"
+  },
+  "files": [
+    "dist-bundle",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "bundle": "node scripts/bundle.mjs",
+    "prepublishOnly": "node scripts/bundle.mjs",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@octokit/auth-app": "^7.1.4",
+    "@octokit/rest": "^21.0.2",
+    "@octokit/webhooks-methods": "^5.1.0",
+    "picocolors": "^1.1.1",
+    "ts-morph": "^28.0.0",
+    "yaml": "^2.6.1",
+    "yocto-spinner": "^1.2.2",
+    "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.723.0"
+  },
+  "peerDependenciesMeta": {
+    "@aws-sdk/client-bedrock-runtime": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@whyguard/application": "workspace:*",
+    "@whyguard/contracts": "workspace:*",
+    "@whyguard/llm-adapter": "workspace:*",
+    "@whyguard/persistence-adapter": "workspace:*",
+    "@whyguard/test-fixtures": "workspace:*",
+    "esbuild": "^0.24.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.7"
+  }
+}

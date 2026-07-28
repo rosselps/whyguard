@@ -1,0 +1,23 @@
+# Terminates TLS and forwards to the API on loopback. Caddy obtains and renews the
+# certificate itself, which is the whole reason it is here: GitHub refuses to deliver a
+# webhook over plain HTTP.
+#
+# WHYGUARD_DOMAIN is set in Caddy's systemd environment by deploy/bootstrap.sh: a hostname
+# to terminate TLS for, or `:80` when CloudFront already does it and there is no domain.
+{$WHYGUARD_DOMAIN} {
+	encode zstd gzip
+
+	reverse_proxy 127.0.0.1:3000 {
+		# The API sends the Check Run only after the scan finishes, and a full-history
+		# clone plus analysis can outlast a default proxy timeout.
+		transport http {
+			response_header_timeout 5m
+			read_timeout 10m
+		}
+	}
+
+	log {
+		output file /var/log/caddy/whyguard.log
+		format json
+	}
+}
